@@ -10,49 +10,26 @@
 <script type="text/babel">
     const root = document.getElementById("root");
 
-    // 기존 방식
-    // const h3 = React.createElement("h3", {
-    //     onMouseeEnter: () => console.log("mouseEnter")
-    // }, "Hello, I'm a span");
+    function App() {
+        
+        // 변수명 없이 배열([])로 변수를 생성하면 배열에 들어있는 값을 변수처럼 사용 할 수 있다.
+        // React.userState(기본값);
+        let [counter, setCounter] = React.useState(0);
+        
+        const onClick = () => {
+            // setCounter(counter + 1); // 함수가 실행되며 ReactDOM.render까지 자동으로 실행시켜 준다.
+            setCounter((current) => current + 1);
+        };
 
-    // JSX
-    const Title = () => (
-        <h3 id="h3" onMouseEnter={() => console.log("mouseEnter")}>
-        Hello I'm a title
-        </h3>
-    );
+        return(
+            <div>
+                <h3>Total clicks: {counter}</h3>
+                <button onClick={onClick}>click me!</button>
+            </div> 
+        ) 
+    };
 
-    // 기존 방식
-    // const btn = React.createElement("button", {
-    //     onClick: () => console.log("i'm clicked!"),
-    //     style: {backgroundColor: "tomato"}
-    // }, "click me!");
-
-    // JSX
-    const Button = () => (
-        <button
-            id="button" 
-            onClick={() => console.log("i'm clicked!")} 
-            style={{
-                backgroundColor: "tomato"
-            }}
-        >
-        click me!
-        </button>
-    );
-
-    //기존 방식
-    // const container = React.createElement("div", null, [h3, btn]);
-
-    // JSX
-    const Container = () => (
-        <div>
-            <Title />
-            <Button />
-        </div>  
-    );
-
-    ReactDOM.render(<Container />, root);
+    ReactDOM.render(<App />, root);
 </script>
 
 </html>
