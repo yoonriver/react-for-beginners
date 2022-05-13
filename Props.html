@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+
+ 
+    function Btn({ text, changeValue, fontSize = 16 }) { 
+
+        return(
+            <button
+            onClick={changeValue}
+            style={{
+                backgroundColor: "tomato",
+                color: "white",
+                padding: "10px 20px",
+                border: 0,
+                borderRadius: 10,
+                fontSize
+            }}>{text}</button>
+        )
+        
+    }
+
+    Btn.propTypes = { /* 컴포넌트.propTypes로 설정해준다. 설정 된 타입에 맞지 않는 값이 전달 되면, 에러 발생 */
+        text: PropTypes.string.isRequired, /* 필수값이라면 .isRequired */
+        fontSize: PropTypes.number /* 필수값이 아니라면 컴포넌트에서 기본값을 설정해 줌으로서 값을 전달 할 수 있다. */
+    }
+
+    function App() {
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
+
+        return (
+            <div>
+                <Btn text={value} fontSize={18} changeValue={changeValue} />
+                <Btn text="Confirm Changes" />
+            </div>
+        )
+
+    };
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>
